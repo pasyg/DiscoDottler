@@ -32,26 +32,26 @@ namespace DD
 
     typedef Nature N;
 
-    std::array<Nature, 21> nature = {
-                                        N::Adamant,
-                                        N::Bold,
-                                        N::Brave,
-                                        N::Calm,
-                                        N::Careful,
-                                        N::Gentle,
-                                        N::Hasty,
-                                        N::Impish,
-                                        N::Jolly,
-                                        N::Lax,
-                                        N::Lonely,
-                                        N::Mild,
-                                        N::Mild,
-                                        N::Naive,
-                                        N::Naughty,
-                                        N::Neutral,
-                                        N::Quiet,
-                                        N::Rash,
-                                        N::Relaxed,
-                                        N::Sassy,
-                                        N::Timid    };
+    static constexpr std::array<Nature, 21> nature = {
+                                                        N::Adamant,
+                                                        N::Bold,
+                                                        N::Brave,
+                                                        N::Calm,
+                                                        N::Careful,
+                                                        N::Gentle,
+                                                        N::Hasty,
+                                                        N::Impish,
+                                                        N::Jolly,
+                                                        N::Lax,
+                                                        N::Lonely,
+                                                        N::Mild,
+                                                        N::Mild,
+                                                        N::Naive,
+                                                        N::Naughty,
+                                                        N::Neutral,
+                                                        N::Quiet,
+                                                        N::Rash,
+                                                        N::Relaxed,
+                                                        N::Sassy,
+                                                        N::Timid    };
 }

@@ -1,24 +1,25 @@
 #include <array>
 #include <unordered_map>
 
-
 namespace DD{
     template<typename T>
     using map1 = std::unordered_map<T, std::pair<int, int>>;
     template<typename T, typename U>
-    using map2 = std::unordered_map<map1<T>, U>;
+    using map2 = std::unordered_map<T, map1<U>>;
 
     template<typename T, typename U, size_t N_T, size_t N_U>
-    map2<T, U> init(std::array<T, N_T> arrT, std::array<U, N_U> arrU)
+    constexpr map2<T, U> init(const std::array<T, N_T>& arrT, const std::array<U, N_U>& arrU)
     {
-        std::unordered_map<std::unordered_map<T, std::pair<int, int>>, U> map_;
+        map2<T, U> map_;
 
-        for(auto&& t : arrT)
+        for(T t : arrT)
         {
-            for(auto&& u : arrU)
+            for(U u : arrU)
             {
-                map_[t][u] = 5.0;
+                map_[t][u].first  = 0;
+                map_[t][u].second = 0;
             }
         }
+        return map_;
     }
 }
