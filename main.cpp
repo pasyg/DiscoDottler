@@ -1,14 +1,34 @@
 #include "discodottledata.hpp"
 
-#include "create.hpp"
+#include "tables.hpp"
+#include <iostream>
 
 int main()
 {
-    DD::map2<DD::Species, DD::Item>    spec_item    = DD::init(DD::species, DD::item);
-    DD::map2<DD::Species, DD::Move>    spec_move    = DD::init(DD::species, DD::move);
-    DD::map2<DD::Move, DD::Species>    move_spec    = DD::init(DD::move, DD::species);
-    DD::map2<DD::Species, DD::Nature>  spec_nat     = DD::init(DD::species, DD::nature);
-    DD::map2<DD::Species, DD::Species> spec_spec    = DD::init(DD::species, DD::species);
+    using namespace DD;
+    mu_map<Species, Item>    spec_item    = init(species, item);
+    mu_map<Species, Move>    spec_move    = init(species, move);
+    mu_map<Move, Species>    move_spec    = init(move, species);
+    mu_map<Species, Nature>  spec_nat     = init(species, nature);
+    mu_map<Species, Species> spec_spec    = init(species, species);
+    mu_map<Species, Species> spec_spec2   = init(species, species);
+    mu_map<Species, Species> spec_spec3   = init(species, species);
+
+    spec_spec2[Species::Aerodactyl][Species::Aerodactyl].first  = 2;
+    spec_spec2[Species::Aerodactyl][Species::Aerodactyl].second = 3;
+
+    spec_spec3[Species::Aerodactyl][Species::Aerodactyl].first  = 20;
+    spec_spec3[Species::Aerodactyl][Species::Aerodactyl].second = 32;
+
+    update(spec_spec, spec_spec2);
+    
+    std::cout << spec_spec[Species::Aerodactyl][Species::Aerodactyl].first  << std::endl;
+    std::cout << spec_spec[Species::Aerodactyl][Species::Aerodactyl].second << std::endl;
+
+    update(spec_spec, spec_spec3);
+    
+    std::cout << spec_spec[Species::Aerodactyl][Species::Aerodactyl].first  << std::endl;
+    std::cout << spec_spec[Species::Aerodactyl][Species::Aerodactyl].second << std::endl;
 
     return 0;
 }
