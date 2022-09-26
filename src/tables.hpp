@@ -1,5 +1,6 @@
 #include <array>
 #include <unordered_map>
+#include <random>
 
 namespace DD
 {
@@ -20,6 +21,23 @@ namespace DD
                 // init to 1 so you can't divide by 0
                 tbl[t][u].first  = 1;
                 tbl[t][u].second = 1;
+            }
+        }
+        return tbl;
+    }
+    template<typename T, typename U, size_t N_T, size_t N_U>
+    mu_map<T, U> random_init(const std::array<T, N_T>& arrT, const std::array<U, N_U>& arrU)
+    {
+        mu_map<T, U> tbl;
+        static auto engine = std::mt19937(std::random_device()());
+        auto distribution  = std::uniform_int_distribution<>(1, 100);
+        for(T t : arrT)
+        {
+            for(U u : arrU)
+            {
+                // random init between 1 and 100
+                tbl[t][u].first  = distribution(engine);
+                tbl[t][u].second = distribution(engine);
             }
         }
         return tbl;
