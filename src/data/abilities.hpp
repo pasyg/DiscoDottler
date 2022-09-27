@@ -6,7 +6,8 @@
 
 namespace DD
 {
-    enum class Ability : uint8_t {
+    enum class Ability : uint8_t 
+    {
         // Generation 3
         Stench,
         Drizzle,

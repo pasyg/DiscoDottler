@@ -1,9 +1,13 @@
 #include <array>
+#include <numeric>
 #include <unordered_map>
 #include <random>
 
 namespace DD
 {
+    /*
+    *  potentially implement loop over function and pass in predicates
+    */
     template<typename T>
     using map1 = std::unordered_map<T, std::pair<int, int>>;
     template<typename T, typename U>
@@ -30,7 +34,7 @@ namespace DD
     {
         mu_map<T, U> tbl;
         static auto engine = std::mt19937(std::random_device()());
-        auto distribution  = std::uniform_int_distribution<>(1, 100);
+        auto distribution  = std::uniform_int_distribution<>(1, 10000);
         for(T t : arrT)
         {
             for(U u : arrU)
@@ -51,12 +55,25 @@ namespace DD
     template<typename T, typename U>
     constexpr void update(mu_map<T, U>& tbl, mu_map<T, U>& update)
     {
-        for(auto&& t : mu_array<T>::arr)
+        for(T t : mu_array<T>::arr)
         {
-            for(auto&& u : mu_array<U>::arr)
+            for(U u : mu_array<U>::arr)
             {
                 tbl[t][u].first  += update[t][u].first;
                 tbl[t][u].second += update[t][u].second;
+            }
+        }
+    }
+    template<typename T, typename U>
+    constexpr void scale_down(mu_map<T, U>& tbl)
+    {
+        for(T t : mu_array<T>::arr)
+        {
+            for(U u : mu_array<U>::arr)
+            {
+                const int gcd = std::gcd(tbl[t][u].first, tbl[t][u].second);
+                tbl[t][u].first  /= gcd;
+                tbl[t][u].second /= gcd;
             }
         }
     }

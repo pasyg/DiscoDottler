@@ -7,6 +7,7 @@ namespace DD
 {
     enum class Item : uint8_t
     {
+        None,
         Leftovers,
         Choiceband,
         Lumberry,

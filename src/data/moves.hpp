@@ -5,7 +5,8 @@
 
 namespace DD
 {
-    enum class Move : std::uint16_t{
+    enum class Move : std::uint16_t
+    {
             Absorb, Acid, Acid_Armor, Aerial_Ace, Aeroblast, Agility, Air_Cutter, Amnesia, Ancient_Power, Arm_Thrust, 
             Aromatherapy, Assist, Astonish, Attract, Aurora_Beam, Barrage, Barrier, Baton_Pass, Beat_Up, Belly_Drum, 
             Bide, Bind, Bite, Blast_Burn, Blaze_Kick, Blizzard, Block, Body_Slam, Bone_Club, Bone_Rush, Bonemerang, 
