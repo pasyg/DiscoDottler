@@ -1,4 +1,7 @@
+#pragma once
+
 #include <array>
+#include <fstream>
 #include <numeric>
 #include <unordered_map>
 #include <random>
@@ -55,9 +58,9 @@ namespace DD
     template<typename T, typename U>
     constexpr void update(mu_map<T, U>& tbl, mu_map<T, U>& update)
     {
-        for(T t : mu_array<T>::arr)
+        for(T t : map_traits<T>::arr)
         {
-            for(U u : mu_array<U>::arr)
+            for(U u : map_traits<U>::arr)
             {
                 tbl[t][u].first  += update[t][u].first;
                 tbl[t][u].second += update[t][u].second;
@@ -67,13 +70,55 @@ namespace DD
     template<typename T, typename U>
     constexpr void scale_down(mu_map<T, U>& tbl)
     {
-        for(T t : mu_array<T>::arr)
+        for(T t : map_traits<T>::arr)
         {
-            for(U u : mu_array<U>::arr)
+            for(U u : map_traits<U>::arr)
             {
                 const int gcd = std::gcd(tbl[t][u].first, tbl[t][u].second);
-                tbl[t][u].first  /= gcd;
-                tbl[t][u].second /= gcd;
+                if(tbl[t][u].first / gcd > 500 || tbl[t][u].second / gcd > 500)
+                    tbl[t][u].first  /= gcd;
+                    tbl[t][u].second /= gcd;
+            }
+        }
+    }
+    template<typename T, typename U>
+    void map_to_csv(mu_map<T, U>& tbl)
+    {
+        std::ofstream file; 
+        file.open(map_traits<T>::name + "_" + map_traits<U>::name + ".csv");
+
+        if(file.is_open())
+        {
+            for(T t : map_traits<T>::arr)
+            {
+                for(U u : map_traits<U>::arr)
+                {
+                    file << tbl[t][u].first  << ",";
+                    file << tbl[t][u].second << ",";
+                }
+                file << "\n";
+            }
+        }
+    }
+    template<typename T, typename U>
+    void pretty_csv(mu_map<T, U>& tbl)
+    {
+        std::ofstream file;
+        file.open("pretty/" + map_traits<T>::name + "_" + map_traits<U>::name + ".csv");
+
+
+    }
+    template<typename T, typename U>
+    void csv_to_map(mu_map<T, U>& tbl)
+    {
+        std::ifstream file;
+        file.open(map_traits<T>::name + "_" + map_traits<U>::name + ".csv");
+
+        if(file.is_open())
+        {
+            for(T t : map_traits<T>::arr)
+            {
+                // getline and seperator shit
             }
         }
     }

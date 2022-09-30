@@ -3,5 +3,4 @@ DiscoDottler
 sort.py
 .vscode
 Debug
-.gitignore
-.Release
+Release

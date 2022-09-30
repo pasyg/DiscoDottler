@@ -9,19 +9,25 @@
 int main()
 {
     using namespace DD;
-    mu_map<Species, Item>    spec_item    = init(species, item);
-    mu_map<Species, Move>    spec_move    = init(species, move);
-    mu_map<Move, Species>    move_spec    = init(move, species);
-    mu_map<Species, Nature>  spec_nat     = init(species, nature);
-    mu_map<Species, Species> spec_spec    = init(species, species);
-    mu_map<Species, Species> spec_spec2   = init(species, species);
-    mu_map<Species, Species> spec_spec3   = init(species, species);
+    ///* First init
+    mu_map<Species, Item>    spec_item    = random_init(species, item);
+    mu_map<Species, Move>    spec_move    = random_init(species, move);
+    mu_map<Move, Species>    move_spec    = random_init(move, species);
+    mu_map<Species, Nature>  spec_nat     = random_init(species, nature);
+    mu_map<Species, Species> spec_spec    = random_init(species, species);
+    mu_map<Species, Species> spec_spec2   = random_init(species, species);
+    mu_map<Species, Species> spec_spec3   = random_init(species, species);
+    //*/
+
+    map_to_csv(spec_item);
 
     std::cout << "first:\t" << spec_spec[Species::Jolteon][Species::Jolteon].first << "\tsecond:\t" << spec_spec[Species::Jolteon][Species::Jolteon].second << "\n";
     update(spec_spec, spec_spec2);
     std::cout << "first:\t" << spec_spec[Species::Jolteon][Species::Jolteon].first << "\tsecond:\t" << spec_spec[Species::Jolteon][Species::Jolteon].second << "\n";
     scale_down(spec_spec);
     std::cout << "first:\t" << spec_spec[Species::Jolteon][Species::Jolteon].first << "\tsecond:\t" << spec_spec[Species::Jolteon][Species::Jolteon].second << "\n";
+
+    map_to_csv(spec_spec);
 
     // for(auto&& x : mu_array<Species>::arr)
     // {
